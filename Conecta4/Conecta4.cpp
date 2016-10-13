@@ -13,7 +13,7 @@ void Conecta4::cicloJuego()
     turno=true;//amarillo
     do {
         v.setTurno(turno);
-        SDL_UpdateWindowSurface(v.window);
+        //SDL_UpdateWindowSurface(v.window);
     }while(v.accion());
     v.cerrar();
 }

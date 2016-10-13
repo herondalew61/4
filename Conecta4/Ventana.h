@@ -11,9 +11,11 @@ class Ventana{
         SDL_Window* window;
         SDL_Surface* pantalla; //variable para la ventana
         SDL_Surface* fondo; //variable para imagen
+        SDL_Surface* tablero; //imagen tablero
         SDL_Surface* imagen;
         SDL_Surface* mano_r;
         SDL_Surface* mano_a;
+        SDL_Surface* turno_mano;
         SDL_Event evento;//variable para detectar eventos
     public:
         bool accion();
