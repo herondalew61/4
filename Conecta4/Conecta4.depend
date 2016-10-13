@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1475426810 source:/home/fer/Dropbox/P.I/Conecta4/Conecta4/main.cpp
+	<iostream>
+	"Ventana.h"
+	"Conecta4.h"
+	<SDL.h>
+
+1475486635 /home/fer/Dropbox/P.I/Conecta4/Conecta4/Ventana.h
+	<iostream>
+	<SDL.h>
+
+1475526155 source:/home/fer/Dropbox/P.I/Conecta4/Conecta4/Conecta4.cpp
+	"Conecta4.h"
+
+1475486232 /home/fer/Dropbox/P.I/Conecta4/Conecta4/Conecta4.h
+	<iostream>
+	<SDL.h>
+	"Ventana.h"
+
+1475525843 source:/home/fer/Dropbox/P.I/Conecta4/Conecta4/Ventana.cpp
+	<iostream>
+	"Ventana.h"
+
