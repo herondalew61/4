@@ -50,10 +50,10 @@ void Ventana::setTurno(bool t){
 //FALSE ES TURNO ROJO
     turno=t;
     if (turno){
-        pantalla=SDL_GetWindowSurface(window);
-        SDL_SetColorKey (mano_a, SDL_TRUE, SDL_MapRGB(mano_a->format,255,255,255));
-        aplicarSurface(505,mano_a,-8,pantalla);
-        SDL_UpdateWindowSurface(window);
+//        pantalla=SDL_GetWindowSurface(window);
+
+//        aplicarSurface(505,mano_a,-8,pantalla);
+//        SDL_UpdateWindowSurface(window);
     }
 
 }
@@ -73,14 +73,14 @@ void Ventana::ponerFondo(int tipo){
         SDL_SetColorKey (fondo, SDL_TRUE, SDL_MapRGB(fondo->format,255,255,255));
         aplicarSurface(450,fondo,81,pantalla);
 
-        SDL_UpdateWindowSurface(window);pantalla=SDL_GetWindowSurface(window);
-        fondo=SDL_LoadBMP("recursos/ficha_amarilla.bmp");
-        if (imagen==NULL){
-            cout<<"error : "<<SDL_GetError()<<endl;
-        }
-        SDL_SetColorKey (fondo, SDL_TRUE, SDL_MapRGB(fondo->format,255,255,255));
-        aplicarSurface(483,fondo,111,pantalla);
-        SDL_UpdateWindowSurface(window);
+//        SDL_UpdateWindowSurface(window);pantalla=SDL_GetWindowSurface(window);
+//        fondo=SDL_LoadBMP("recursos/ficha_amarilla.bmp");
+//        if (imagen==NULL){
+//            cout<<"error : "<<SDL_GetError()<<endl;
+//        }
+//        SDL_SetColorKey (fondo, SDL_TRUE, SDL_MapRGB(fondo->format,255,255,255));
+//        aplicarSurface(483,fondo,111,pantalla);
+//        SDL_UpdateWindowSurface(window);
         //SDL_SetColorKey(1) parametro imagen,
         // 2) parametro Flag si deseamos o no transparencia color,
         // 3) formato y color de transparencia)
@@ -92,29 +92,21 @@ void Ventana::ponerFondo(int tipo){
 bool Ventana::accion()
 {
     while(SDL_PollEvent(&evento)){
-        if (evento.type==SDL_QUIT){//cerrar ventana
+        switch(evento.type){//revision de eventos
+            case SDL_QUIT:
                 return false;//sale del GAME LOOP
-                //SDL_UpdateWindowSurface(window);
-        }else {
-            switch(evento.key.keysym.sym){
-            //Left arrow
-            case SDLK_LEFT: //Moving sprite left
                 break;
-            //right arrow
-            case SDLK_RIGHT: //Moving sprite right
-
-                /*combinamos ambos surfaces*/
-
-                //ponerFondo(1);
-                //SDL_FillRect(pantalla,0,SDL_MapRGB(pantalla->format,254,255,255));
-                //SDL_FillRect(mano_a,0,SDL_MapRGB(mano_a->format,0,0,0));
-                //SDL_FillRect(pantalla, NULL, SDL_MapRGB(pantalla->format, 0xFF, 0xFF, 0xFF));
+                //SDL_UpdateWindowSurface(window);
+            case SDL_MOUSEBUTTONDOWN: //Moving sprite right
+                return false;
+                break;
+            case SDL_MOUSEMOTION: //Moving sprite right
                 pantalla=SDL_GetWindowSurface(window);
-                aplicarSurface(575,mano_a,-8,pantalla);
-                //SDL_UpdateWindowSurface(window);
+                SDL_SetColorKey (mano_a, SDL_TRUE, SDL_MapRGB(mano_a->format,255,255,255));
+                aplicarSurface(evento.motion.x,mano_a,evento.motion.y,pantalla);
+                SDL_UpdateWindowSurface(window);
+                /*combinamos ambos surfaces*/
                 break;
-            }
-
         }
         //aplicar surface
         //llenando de informacion el buffer de video
