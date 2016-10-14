@@ -7,9 +7,12 @@ using namespace std;
 #define W 1250
 #define H 700
 
-void Ventana::inicializar()
-{
+void Ventana::inicializar(){
     tipo=0;
+    tablero = NULL;
+    mano_a = NULL;
+    mano_r = NULL;
+    turno_mano = NULL;
     window = NULL;
     pantalla=NULL; //variable para la ventana
     fondo=NULL; //variable para imagen
@@ -19,12 +22,31 @@ void Ventana::inicializar()
     W,H,//ancho largo w h
     SDL_WINDOW_SHOWN);//Uint32      flags
     //SDL_CreateWindow(titulo,Pos x,pos y,ancho,alto,mostrar);
-    fondo=SDL_LoadBMP("recursos/fondo_papel.bmp");
-    tablero=SDL_LoadBMP("recursos/tablero.bmp");
-    mano_a=SDL_LoadBMP("recursos/manita_a.bmp");
-    mano_r=SDL_LoadBMP("recursos/manita_r.bmp");
-}
+    if (!cargarArchivos()){
+        cout<<"No se pudo cargar Archivo"<<endl;
+        cerrar();
+    }
 
+}
+bool Ventana::cargarArchivos(){
+    fondo=SDL_LoadBMP("recursos/fondo_papel.bmp");
+    if (fondo==NULL){
+        return false;
+    }
+    tablero=SDL_LoadBMP("recursos/tablero.bmp");
+    if (tablero==NULL){
+        return false;
+    }
+    mano_a=SDL_LoadBMP("recursos/manita_a.bmp");
+    if (mano_a==NULL){
+        return false;
+    }
+    mano_r=SDL_LoadBMP("recursos/manita_r.bmp");
+    if (mano_r==NULL){
+        return false;
+    }
+    return true;
+}
 void Ventana::aplicarSurface(int x,SDL_Surface* poner,
                              int y, SDL_Surface* destino){
     //rectangulo temporal para lo desplazamientos
@@ -78,7 +100,15 @@ void Ventana::cargarVentana(int t){
 //        SDL_UpdateWindowSurface(window);
 
     }else if (tipo==2){
-
+        if( TTF_Init() == -1 ){
+            cout<<"no se puede iniciar texto"<<endl;
+            cerrar();
+        }
+        letra = TTF_OpenFont("recursos/font/stocky.ttf",80);//url y tamaño de letra
+        SDL_Color letraColor = {0, 0, 0};//negro
+        SDL_Surface *mensaje=NULL;
+        mensaje = TTF_RenderText_Blended( letra, "Conecta 4", letraColor);
+        aplicarSurface(400,mensaje,100,pantalla);
     }
 }
 

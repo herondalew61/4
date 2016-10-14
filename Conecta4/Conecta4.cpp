@@ -2,13 +2,11 @@
 #include "Conecta4.h"
 using namespace std;
 
-void Conecta4::inicializar()
-{
+void Conecta4::inicializar(){
     activo=true;
 }
 
-void Conecta4::cicloJuego()
-{
+void Conecta4::cicloJuego(){
      /*GAME LOOP*/
     turno=true;//amarillo
     v.setTurno(turno);
@@ -25,16 +23,16 @@ void Conecta4::crearVentana(){
         errorJuego("no se puede crear ventana");
     }
     /*SI SE CREO LA VENTANA*/
-    v.cargarVentana(1);
+    v.cargarVentana(2);
 //    v.ponerFondo(2);
-
 }
-void Conecta4::errorJuego(string error)
-{
+
+void Conecta4::errorJuego(string error){
     cout<<error<<" : "<<SDL_GetError()<<endl;
     SDL_FreeSurface(v.fondo);//para que no se quede en memori la imagen
     SDL_DestroyWindow(v.window);//destruimos puntero
-    SDL_Quit();//quitamos la aplicacion
+    SDL_Quit();//quitamos la aplicacion sdl
+    TTF_Quit();//quitamos ttf de las letras
     exit(0);
 }
 
