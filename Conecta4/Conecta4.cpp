@@ -11,8 +11,8 @@ void Conecta4::cicloJuego()
 {
      /*GAME LOOP*/
     turno=true;//amarillo
+    v.setTurno(turno);
     do {
-        v.setTurno(turno);
         //SDL_UpdateWindowSurface(v.window);
     }while(v.accion());
     v.cerrar();
@@ -25,7 +25,7 @@ void Conecta4::crearVentana(){
         errorJuego("no se puede crear ventana");
     }
     /*SI SE CREO LA VENTANA*/
-    v.cargarVentana(2);
+    v.cargarVentana(1);
 //    v.ponerFondo(2);
 
 }

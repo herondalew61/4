@@ -99,7 +99,11 @@ bool Ventana::accion()
                 //SDL_UpdateWindowSurface(window);
             case SDL_MOUSEBUTTONDOWN: //Moving sprite right
                 cout<<"x "<<evento.motion.x<<" y "<<evento.motion.y<<endl;
-//               return false;
+                if (turno){
+                    setTurno(false);
+                }else{
+                    setTurno(true);
+                }
                 break;
             case SDL_MOUSEMOTION: //Moving sprite right
                 if (tipo==1){
