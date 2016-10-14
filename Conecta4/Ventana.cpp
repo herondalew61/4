@@ -37,14 +37,19 @@ void Ventana::aplicarSurface(int x,SDL_Surface* poner,
     //    posicion.w=300;
     if (poner==NULL){
         cout<<"error : "<<SDL_GetError()<<endl;
+        cerrar();
     }
-    //SDL_FillRect(destino,&posicion, SDL_MapRGB(pantalla->format, 0xFF, 0xFF, 0xFF));
+    //poner la imagen transparente
+    SDL_SetColorKey (poner, SDL_TRUE, SDL_MapRGB(poner->format,255,255,255));
+    //SDL_SetColorKey(1) parametro imagen,
+    // 2) parametro Flag si deseamos o no transparencia color,
+    // 3) formato y color de transparencia)
     SDL_BlitSurface(poner,NULL,destino,&posicion);
 }
 
-void Ventana::cargarimagen(string archivo){
-
-
+void Ventana::actualizar(){
+    cargarVentana(1);
+//    SDL_FillRect(fondo,&posicion, SDL_MapRGB(pantalla->format, 0xFF, 0xFF, 0xFF));
 
 }
 
@@ -60,31 +65,20 @@ void Ventana::setTurno(bool t){
     }
 
 }
-void Ventana::ponerFondo(int tipo){
-    if (tipo==1){
-        /*colocamos fondo*/
-        pantalla=SDL_GetWindowSurface(window);
-        aplicarSurface(0,fondo,0,pantalla);
-        if (fondo==NULL){
-            cout<<"error : "<<SDL_GetError()<<endl;
-        }
-        /*colocamos tablero*/
-        pantalla=SDL_GetWindowSurface(window);
-        SDL_SetColorKey (tablero, SDL_TRUE, SDL_MapRGB(tablero->format,255,255,255));
-        //poner la imagen transparente
-        aplicarSurface(450,tablero,81,pantalla);
 
+void Ventana::cargarVentana(int tipo){
+        pantalla=SDL_GetWindowSurface(window);
+        /*colocamos fondo*/
+        aplicarSurface(0,fondo,0,pantalla);
+    if (tipo==1){
+        /*colocamos tablero*/
+        aplicarSurface(450,tablero,81,pantalla);
 //        SDL_UpdateWindowSurface(window);pantalla=SDL_GetWindowSurface(window);
-//        fondo=SDL_LoadBMP("recursos/ficha_amarilla.bmp");
-//        if (imagen==NULL){
-//            cout<<"error : "<<SDL_GetError()<<endl;
-//        }
+
 //        SDL_SetColorKey (fondo, SDL_TRUE, SDL_MapRGB(fondo->format,255,255,255));
 //        aplicarSurface(483,fondo,111,pantalla);
 //        SDL_UpdateWindowSurface(window);
-        //SDL_SetColorKey(1) parametro imagen,
-        // 2) parametro Flag si deseamos o no transparencia color,
-        // 3) formato y color de transparencia)
+
     }else if (tipo==2){
 
     }
@@ -110,11 +104,12 @@ bool Ventana::accion()
 //               return false;
                 break;
             case SDL_MOUSEMOTION: //Moving sprite right
-                ponerFondo(1);
+                actualizar();
+                /*dibuja en el cursor una mano*/
                 pantalla=SDL_GetWindowSurface(window);
                 SDL_SetColorKey (turno_mano, SDL_TRUE, SDL_MapRGB(turno_mano->format,255,255,255));
-                aplicarSurface(evento.motion.x-30,turno_mano,evento.motion.y-80,pantalla);
-                /*combinamos ambos surfaces*/
+                //pos de la mano
+                aplicarSurface(evento.motion.x-22,turno_mano,evento.motion.y-72,pantalla);
                 break;
         }
         //aplicar surface

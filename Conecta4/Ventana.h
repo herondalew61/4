@@ -22,10 +22,10 @@ class Ventana{
         void inicializar();
         void aplicarSurface(int x,SDL_Surface* poner,
                             int y, SDL_Surface* destino);
-        void cargarimagen(string archivo);
+        void actualizar();
         void cerrar();
         void setTurno(bool t);
-        void ponerFondo(int tipo);
+        void cargarVentana(int tipo);
 
 
 };
