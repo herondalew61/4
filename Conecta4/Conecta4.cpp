@@ -25,11 +25,9 @@ void Conecta4::crearVentana(){
         errorJuego("no se puede crear ventana");
     }
     /*SI SE CREO LA VENTANA*/
-    v.cargarVentana(1);
+    v.cargarVentana(2);
 //    v.ponerFondo(2);
-    if (v.fondo==NULL){
-        errorJuego("No se encuentra la imagen");
-    }
+
 }
 void Conecta4::errorJuego(string error)
 {

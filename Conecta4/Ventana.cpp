@@ -32,23 +32,20 @@ void Ventana::aplicarSurface(int x,SDL_Surface* poner,
     //desde donde comienza a pintar
     posicion.x=x;
     posicion.y=y;
-    // recorta la imagen
-    //    posicion.h=300;
-    //    posicion.w=300;
     if (poner==NULL){
         cout<<"error : "<<SDL_GetError()<<endl;
         cerrar();
     }
     //poner la imagen transparente
-    SDL_SetColorKey (poner, SDL_TRUE, SDL_MapRGB(poner->format,255,255,255));
     //SDL_SetColorKey(1) parametro imagen,
     // 2) parametro Flag si deseamos o no transparencia color,
     // 3) formato y color de transparencia)
+    SDL_SetColorKey (poner, SDL_TRUE, SDL_MapRGB(poner->format,255,255,255));
     SDL_BlitSurface(poner,NULL,destino,&posicion);
 }
 
 void Ventana::actualizar(){
-    cargarVentana(1);
+    cargarVentana(tipo);
 //    SDL_FillRect(fondo,&posicion, SDL_MapRGB(pantalla->format, 0xFF, 0xFF, 0xFF));
 
 }
@@ -66,7 +63,8 @@ void Ventana::setTurno(bool t){
 
 }
 
-void Ventana::cargarVentana(int tipo){
+void Ventana::cargarVentana(int t){
+        tipo=t;
         pantalla=SDL_GetWindowSurface(window);
         /*colocamos fondo*/
         aplicarSurface(0,fondo,0,pantalla);
@@ -104,12 +102,12 @@ bool Ventana::accion()
 //               return false;
                 break;
             case SDL_MOUSEMOTION: //Moving sprite right
-                actualizar();
-                /*dibuja en el cursor una mano*/
-                pantalla=SDL_GetWindowSurface(window);
-                SDL_SetColorKey (turno_mano, SDL_TRUE, SDL_MapRGB(turno_mano->format,255,255,255));
-                //pos de la mano
-                aplicarSurface(evento.motion.x-22,turno_mano,evento.motion.y-72,pantalla);
+                if (tipo==1){
+                    actualizar();
+                    /*dibuja en el cursor una mano*/
+                    //pos de la mano
+                    aplicarSurface(evento.motion.x-22,turno_mano,evento.motion.y-72,pantalla);
+                }
                 break;
         }
         //aplicar surface
@@ -124,6 +122,7 @@ void Ventana::cerrar(){
     //SDL_FreeSurface(ficha_r);
     SDL_FreeSurface(mano_r);
     SDL_FreeSurface(mano_a);
+    SDL_FreeSurface(tablero);
     SDL_FreeSurface(fondo);//para que no se quede en memori la imagen
     SDL_DestroyWindow(window);//destruimos punt
 }

@@ -21,7 +21,7 @@
 	<iostream>
 	"Ventana.h"
 
-1476403368 source:/home/fer/Dropbox/4/Conecta4/Conecta4.cpp
+1476403774 source:/home/fer/Dropbox/4/Conecta4/Conecta4.cpp
 	"Conecta4.h"
 
 1475486232 /home/fer/Dropbox/4/Conecta4/Conecta4.h
@@ -29,7 +29,7 @@
 	<SDL.h>
 	"Ventana.h"
 
-1476403354 /home/fer/Dropbox/4/Conecta4/Ventana.h
+1476403905 /home/fer/Dropbox/4/Conecta4/Ventana.h
 	<iostream>
 	<SDL.h>
 
@@ -39,7 +39,7 @@
 	"Conecta4.h"
 	<SDL.h>
 
-1476382006 source:/home/fer/Dropbox/4/Conecta4/Ventana.cpp
+1476403946 source:/home/fer/Dropbox/4/Conecta4/Ventana.cpp
 	<iostream>
 	"Ventana.h"
 

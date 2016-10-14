@@ -25,7 +25,7 @@ class Ventana{
         void actualizar();
         void cerrar();
         void setTurno(bool t);
-        void cargarVentana(int tipo);
+        void cargarVentana(int t);
 
 
 };
